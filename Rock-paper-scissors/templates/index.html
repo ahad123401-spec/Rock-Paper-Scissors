@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Rock Paper Scissors</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <div id="match-overlay" class="hidden">
+        <div class="overlay-box">
+            <p class="overlay-label">Match over</p>
+            <h2 id="overlay-title" class="overlay-result">&mdash;</h2>
+            <p class="overlay-score" id="overlay-score">&mdash;</p>
+
+            <div class="overlay-actions">
+                <button class="btn btn-primary" id="overlay-new-match">New Match</button>
+                <button id="overlay-reset" class="btn btn-ghost">Reset Game</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="page-wrapper">
+
+        <header class="site-header">
+            <span class="site-title">Rock Paper Scissors</span>
+
+            <div class="header-controls">
+                <button class="btn btn-ghost btn-sm" id="btn-new-match">New Match</button>
+                <button class="btn btn-ghost btn-sm" id="btn-reset">Reset Game</button>
+            </div>
+        </header>
+
+        <main class="main-content">
+
+            <div class="settings-row">
+
+                <div class="setting-group">
+                    <span class="setting-label">Difficulty</span>
+
+                    <div class="toggle-group">
+                        <button class="toggle-btn active" data-setting="difficulty" data-value="easy">Easy</button>
+                        <button class="toggle-btn active" data-value="normal" data-setting="difficulty">Normal</button>
+                        <button class="toggle-btn" data-value="hard" data-setting="difficulty">Hard</button>
+                    </div>
+                </div>
+
+                <div class="setting-group">
+                    <span class="setting-label">Best of</span>
+
+                    <div class="toggle-group">
+                        <button class="toggle-btn" data-setting="match_length" data-value="1">1</button>
+                        <button class="toggle-btn" data-setting="match_length" data-value="3">3</button>
+                        <button class="toggle-btn active" data-setting="match_length" data-value="5">5</button>
+                        <button class="toggle-btn" data-setting="match_length" data-value="7">7</button>
+                        <button class="toggle-btn" data-setting="match_length" data-value="9">9</button>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="scoreboard">
+
+                <div class="score-block">
+                    <span class="score-name">You</span>
+                    <span class="score-number" id="score-player">0</span>
+                </div>
+
+                <div class="score-divider">
+                    <span class="draws-count" id="score-draws">0 draws</span>
+                    <span class="match-info">
+                        Best of <span id="info-match-length">5</span>
+                        &mdash; first to <span id="info-target">3</span>
+                    </span>
+                </div>
+
+                <div class="score-block score-block--right">
+                    <span class="score-name">Computer</span>
+                    <span id="score-computer" class="score-number">0</span>
+                </div>
+
+            </div>
+
+            <div class="result-area">
+                <p class="result-message" id="result-message">Choose your move</p>
+                <p class="result-detail" id="result-detail">&nbsp;</p>
+            </div>
+
+            <div class="game-buttons">
+                <button class="move-btn" data-choice="rock">Rock</button>
+                <button class="move-btn" data-choice="paper">Paper</button>
+                <button class="move-btn" data-choice="scissors">Scissors</button>
+            </div>
+
+            <div class="lower-section">
+
+                <div class="stats-panel">
+                    <h3 class="panel-title">Statistcs</h3>
+
+                    <div class="stats-list">
+                        <div class="stat-row">
+                            <span>Rounds played</span>
+                            <span id="stat-rounds">0</span>
+                        </div>
+
+                        <div class="stat-row">
+                            <span>Wins</span>
+                            <span id="stat-wins">0</span>
+                        </div>
+
+                        <div class="stat-row">
+                            <span>Losses</span>
+                            <span id="stat-losses">0</span>
+                        </div>
+
+                        <div class="stat-row">
+                            <span>Draws</span>
+                            <span id="stat-draws">0</span>
+                        </div>
+
+                        <div class="stat-row">
+                            <span>Win rate</span>
+                            <span id="stat-winrate">&mdash;</span>
+                        </div>
+
+                        <div class="stat-row">
+                            <span>Current streak</span>
+                            <span id="stat-streak">0</span>
+                        </div>
+
+                        <div class="stat-row">
+                            <span>Best streak</span>
+                            <span id="stat-best-streak">0</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="history-panel">
+                    <h3 class="panel-title">Histroy</h3>
+
+                    <ul class="history-list" id="history-list">
+                        <li class="history-empty">No rounds played yet</li>
+                    </ul>
+                </div>
+
+            </div>
+
+        </main>
+
+        <footer class="site-footer">
+            <span>Rock Paper Scissors</span>
+        </footer>
+
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+</html>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Rock Paper Scissors</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <div id="match-overlay" class="hidden">
+        <div class="overlay-box">
+            <p class="overlay-label">Match over</p>
+            <h2 id="overlay-title" class="overlay-result">&mdash;</h2>
+            <p class="overlay-score" id="overlay-score">&mdash;</p>
+
+            <div class="overlay-actions">
+                <button class="btn btn-primary" id="overlay-new-match">New Match</button>
+                <button id="overlay-reset" class="btn btn-ghost">Reset Game</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="page-wrapper">
+
+        <header class="site-header">
+            <span class="site-title">Rock Paper Scissors</span>
+
+            <div class="header-controls">
+                <button class="btn btn-ghost btn-sm" id="btn-new-match">New Match</button>
+                <button class="btn btn-ghost btn-sm" id="btn-reset">Reset Game</button>
+            </div>
+        </header>
+
+        <main class="main-content">
+
+            <div class="settings-row">
+
+                <div class="setting-group">
+                    <span class="setting-label">Difficulty</span>
+
+                    <div class="toggle-group">
+                        <button class="toggle-btn active" data-setting="difficulty" data-value="easy">Easy</button>
+                        <button class="toggle-btn active" data-value="normal" data-setting="difficulty">Normal</button>
+                        <button class="toggle-btn" data-value="hard" data-setting="difficulty">Hard</button>
+                    </div>
+                </div>
+
+                <div class="setting-group">
+                    <span class="setting-label">Best of</span>
+
+                    <div class="toggle-group">
+                        <button class="toggle-btn" data-setting="match_length" data-value="1">1</button>
+                        <button class="toggle-btn" data-setting="match_length" data-value="3">3</button>
+                        <button class="toggle-btn active" data-setting="match_length" data-value="5">5</button>
+                        <button class="toggle-btn" data-setting="match_length" data-value="7">7</button>
+                        <button class="toggle-btn" data-setting="match_length" data-value="9">9</button>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="scoreboard">
+
+                <div class="score-block">
+                    <span class="score-name">You</span>
+                    <span class="score-number" id="score-player">0</span>
+                </div>
+
+                <div class="score-divider">
+                    <span class="draws-count" id="score-draws">0 draws</span>
+                    <span class="match-info">
+                        Best of <span id="info-match-length">5</span>
+                        &mdash; first to <span id="info-target">3</span>
+                    </span>
+                </div>
+
+                <div class="score-block score-block--right">
+                    <span class="score-name">Computer</span>
+                    <span id="score-computer" class="score-number">0</span>
+                </div>
+
+            </div>
+
+            <div class="result-area">
+                <p class="result-message" id="result-message">Choose your move</p>
+                <p class="result-detail" id="result-detail">&nbsp;</p>
+            </div>
+
+            <div class="game-buttons">
+                <button class="move-btn" data-choice="rock">Rock</button>
+                <button class="move-btn" data-choice="paper">Paper</button>
+                <button class="move-btn" data-choice="scissors">Scissors</button>
+            </div>
+
+            <div class="lower-section">
+
+                <div class="stats-panel">
+                    <h3 class="panel-title">Statistcs</h3>
+
+                    <div class="stats-list">
+                        <div class="stat-row">
+                            <span>Rounds played</span>
+                            <span id="stat-rounds">0</span>
+                        </div>
+
+                        <div class="stat-row">
+                            <span>Wins</span>
+                            <span id="stat-wins">0</span>
+                        </div>
+
+                        <div class="stat-row">
+                            <span>Losses</span>
+                            <span id="stat-losses">0</span>
+                        </div>
+
+                        <div class="stat-row">
+                            <span>Draws</span>
+                            <span id="stat-draws">0</span>
+                        </div>
+
+                        <div class="stat-row">
+                            <span>Win rate</span>
+                            <span id="stat-winrate">&mdash;</span>
+                        </div>
+
+                        <div class="stat-row">
+                            <span>Current streak</span>
+                            <span id="stat-streak">0</span>
+                        </div>
+
+                        <div class="stat-row">
+                            <span>Best streak</span>
+                            <span id="stat-best-streak">0</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="history-panel">
+                    <h3 class="panel-title">Histroy</h3>
+
+                    <ul class="history-list" id="history-list">
+                        <li class="history-empty">No rounds played yet</li>
+                    </ul>
+                </div>
+
+            </div>
+
+        </main>
+
+        <footer class="site-footer">
+            <span>Rock Paper Scissors</span>
+        </footer>
+
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+</html>
+
+
+            <div class="settings-row">
+
+                <div class="setting-group">
+                    <span class="setting-label">Difficulty</span>
+
+                    <div class="toggle-group">
+                        <button class="toggle-btn active" data-setting="difficulty" data-value="easy">Easy</button>
+                        <button class="toggle-btn active" data-value="normal" data-setting="difficulty">Normal</button>
+                        <button class="toggle-btn" data-value="hard" data-setting="difficulty">Hard</button>
+                    </div>
+                </div>
+
+                <div class="setting-group">
+                    <span class="setting-label">Best of</span>
+
+                    <div class="toggle-group">
+                        <button class="toggle-btn" data-setting="match_length" data-value="1">1</button>
+                        <button class="toggle-btn" data-setting="match_length" data-value="3">3</button>
+                        <button class="toggle-btn active" data-setting="match_length" data-value="5">5</button>
+                        <button class="toggle-btn" data-setting="match_length" data-value="7">7</button>
+                        <button class="toggle-btn" data-setting="match_length" data-value="9">9</button>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="scoreboard">
+
+                <div class="score-block">
+                    <span class="score-name">You</span>
+                    <span class="score-number" id="score-player">0</span>
+                </div>
+
+                <div class="score-divider">
+                    <span class="draws-count" id="score-draws">0 draws</span>
+                    <span class="match-info">
+                        Best of <span id="info-match-length">5</span>
+                        &mdash; first to <span id="info-target">3</span>
+                    </span>
+                </div>
+
+                <div class="score-block score-block--right">
+                    <span class="score-name">Computer</span>
+                    <span id="score-computer" class="score-number">0</span>
+                </div>
+
+            </div>
+
+            <div class="result-area">
+                <p class="result-message" id="result-message">Choose your move</p>
+                <p class="result-detail" id="result-detail">&nbsp;</p>
+            </div>
+
+            <div class="game-buttons">
+                <button class="move-btn" data-choice="rock">Rock</button>
+                <button class="move-btn" data-choice="paper">Paper</button>
+                <button class="move-btn" data-choice="scissors">Scissors</button>
+            </div>
+
+            <div class="lower-section">
+
+                <div class="stats-panel">
+                    <h3 class="panel-title">Statistcs</h3>
+
+                    <div class="stats-list">
+                        <div class="stat-row">
+                            <span>Rounds played</span>
+                            <span id="stat-rounds">0</span>
+                        </div>
+
+                        <div class="stat-row">
+                            <span>Wins</span>
+                            <span id="stat-wins">0</span>
+                        </div>
+
+                        <div class="stat-row">
+                            <span>Losses</span>
+                            <span id="stat-losses">0</span>
+                        </div>
+
+                        <div class="stat-row">
+                            <span>Draws</span>
+                            <span id="stat-draws">0</span>
+                        </div>
+
+                        <div class="stat-row">
+                            <span>Win rate</span>
+                            <span id="stat-winrate">&mdash;</span>
+                        </div>
+
+                        <div class="stat-row">
+                            <span>Current streak</span>
+                            <span id="stat-streak">0</span>
+                        </div>
+
+                        <div class="stat-row">
+                            <span>Best streak</span>
+                            <span id="stat-best-streak">0</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="history-panel">
+                    <h3 class="panel-title">Histroy</h3>
+
+                    <ul class="history-list" id="history-list">
+                        <li class="history-empty">No rounds played yet</li>
+                    </ul>
+                </div>
+
+            </div>
+
+        </main>
+
+        <footer class="site-footer">
+            <span>Rock Paper Scissors</span>
+        </footer>
+
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+</html>
+
+               
