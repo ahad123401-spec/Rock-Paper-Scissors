@@ -1,29 +1,35 @@
 Rock Paper Scissors
 
-This is my own version of the classic Rock Paper Scissors game, built using Python, Flask, HTML, CSS and JavaScript. I wanted to make something a little more interesting than the usual game, so I added different difficulty levels, match settings, statistics and an achievements system.
+A simple Rock Paper Scissors game made with HTML, CSS and JavaScript.
+
+Play here: https://ahad123401-spec.github.io/Rock-Paper-Scissors/
 
 Features
 
-- Three difficulty levels: Easy, Normal and Hard
-- Best of 1, 3, 5, 7 and 9 matches
-- Player and computer score tracking
-- Win rate and winning streak statistics
+- Easy, Normal and Hard difficulty
+- Best of 1, 3, 5, 7 and 9 match modes
+- Score tracking
+- Win rate and statistics
+- Winning streaks
 - Game history
-- Achievements for reaching different milestones
-- A dark-themed user interface
+- Achievements
 
-Built With
+Technologies
 
-- Python and Flask for the backend
-- HTML for the page structure
-- CSS for styling
-- JavaScript for game interactions and achievements
+- HTML
+- CSS
+- JavaScript
+- Local Storage
 
-How to Run
+Run Locally
 
-1. Make sure Python is installed.
-2. Install Flask using "pip install flask".
-3. Run the application with "python app.py".
-4. Open "http://127.0.0.1:5000" in your browser.
+Download the repository and open "index.html" in your browser. No installation or server setup is needed.
 
-The game runs locally on your computer using Flask.
+Project Structure
+
+Rock-Paper-Scissors/
+├── index.html
+├── style.css
+├── script.js
+├── achievements.js
+└── README.md
